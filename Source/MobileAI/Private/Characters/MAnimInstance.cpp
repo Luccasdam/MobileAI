@@ -6,7 +6,6 @@
 #include "GameFramework/PawnMovementComponent.h"
 
 
-// Update every frame
 void UMAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 {
 	Super::NativeUpdateAnimation(DeltaSeconds);

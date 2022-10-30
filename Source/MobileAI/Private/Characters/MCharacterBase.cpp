@@ -3,7 +3,7 @@
 
 #include "Characters/MCharacterBase.h"
 
-// Sets default values
+
 AMCharacterBase::AMCharacterBase()
 	: bCrouching(false)
 {

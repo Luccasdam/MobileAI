@@ -1,10 +1,11 @@
-// Code made by Luccas Machado. Feel free to use it anyway you like!
+// Code made by Luccas Machado. Feel free to use it anyway you like it!
+
 
 #pragma once
-
 #include "CoreMinimal.h"
 #include "Animation/AnimInstance.h"
 #include "MAnimInstance.generated.h"
+
 
 /**
  *
