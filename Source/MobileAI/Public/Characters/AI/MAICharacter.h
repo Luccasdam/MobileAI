@@ -6,8 +6,10 @@
 #include "Characters/MCharacterBase.h"
 #include "MAICharacter.generated.h"
 
-class UBehaviorTree;
+
+class UMPatrolPathFollowerComponent;
 class UTextRenderComponent;
+class UBehaviorTree;
 
 
 UENUM(BlueprintType)
@@ -52,6 +54,7 @@ class MOBILEAI_API AMAICharacter : public AMCharacterBase
 public:
 	AMAICharacter();
 
+	// Methods
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void SetAIState(const EAIState NewState);
 
@@ -64,10 +67,19 @@ public:
 	UPROPERTY()
 	FOnStateChanged OnStateChanged;
 
+	
+	// Components
 protected:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category=Components)
+	/** To increase modularity, this could be added per AI Character in blueprints */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Components)
+	UMPatrolPathFollowerComponent* PatrolPathFollowerComp;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category=Components)
 	UTextRenderComponent* TextRenderComp;
 	
+	
+	// Data
+protected:
 	UPROPERTY(EditDefaultsOnly, Category=AI)
 	UBehaviorTree* BT;	
 
@@ -80,6 +92,7 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category=AI)
 	FDisplayStateStruct DisplayAlertStruct;
 
+	// Inline Getters
 public:
 	FORCEINLINE UBehaviorTree* GetBT() const { return BT; };
 	FORCEINLINE EAIState GetAIState() const { return AIState; }

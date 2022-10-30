@@ -2,6 +2,7 @@
 
 
 #include "Characters/AI/MAICharacter.h"
+#include "Common/MPatrolPathFollowerComponent.h"
 #include "Components/TextRenderComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -13,6 +14,9 @@ AMAICharacter::AMAICharacter()
 	bUseControllerRotationYaw = false;
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 270.f, 0.0f);
 	GetCharacterMovement()->bUseControllerDesiredRotation = true;
+
+	// PathFollow setup
+	PatrolPathFollowerComp = CreateDefaultSubobject<UMPatrolPathFollowerComponent>("PathFollowingComp");
 
 	// TextRender setup
 	TextRenderComp = CreateDefaultSubobject<UTextRenderComponent>("TextRenderComp");
