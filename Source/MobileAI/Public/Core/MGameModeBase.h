@@ -10,7 +10,7 @@
 UENUM(BlueprintType)
 enum class EPlayerDetectedHandleMethod : uint8
 {
-	RestartLevel
+	GameOver
 };
 
 
@@ -22,18 +22,24 @@ class MOBILEAI_API AMGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 
+	// Methods
 public:
+	// TODO: This should be made inside an AI Manager Class. Making here just for simplicity.
+	void ReportPlayerDetected();
+	
 	UFUNCTION(BlueprintCallable)
 	void SetGameOver(bool bMissionSucceeded);
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void DisplayGameOverScreen(bool bMissionSucceeded);
-	
-	// TODO: This should be made inside an AI Manager Class. Making here just for simplicity.
-	void ReportPlayerDetected();
-	
-	void ReloadLevel() const;
 
+	UFUNCTION(BlueprintCallable)
+	void RetryCurrentLevel();
+
+	UFUNCTION(BlueprintCallable)
+	void OpenNextLevel();
+
+	// Data
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Gameplay)
 	EPlayerDetectedHandleMethod PlayerDetectedHandleMethod;
@@ -44,4 +50,11 @@ protected:
 private:
 	UPROPERTY(BlueprintReadOnly, Category=Gameplay, meta=(AllowPrivateAccess))
 	bool bGameOver = false;
+
+	// Temp
+protected:
+	uint8 GetNextLevelIndex();
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category=Temp)
+	TArray<FString> LevelNameList;
 };

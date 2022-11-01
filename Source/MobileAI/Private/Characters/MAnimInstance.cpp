@@ -10,10 +10,13 @@ void UMAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 {
 	Super::NativeUpdateAnimation(DeltaSeconds);
 
-	const AMCharacterBase* MyCharacter = Cast<AMCharacterBase>(TryGetPawnOwner());
-	if (MyCharacter != nullptr)
+	if (TryGetPawnOwner())
 	{
-		bCrouching = MyCharacter->GetCrouching();
-		WalkingSpeed = MyCharacter->GetMovementComponent()->Velocity.Size();
+		const AMCharacterBase* MyCharacter = Cast<AMCharacterBase>(TryGetPawnOwner());
+		if (MyCharacter != nullptr)
+		{
+			bCrouching = MyCharacter->GetCrouching();
+			WalkingSpeed = MyCharacter->GetMovementComponent()->Velocity.Size();
+		}
 	}
 }

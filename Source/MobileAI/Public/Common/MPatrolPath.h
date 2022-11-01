@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "MPatrolPath.generated.h"
 
+class UBillboardComponent;
+
 
 USTRUCT(BlueprintType)
 struct FPatrolPointStruct
@@ -31,14 +33,15 @@ public:
 	AMPatrolPath();
 
 	// Methods
+public:
 	FVector GetPatrolLocation(const uint8 PatrolIndex) const;
 
 	/** Return the Closest Patrol Index found by AI */
 	uint8 GetClosestPatrolIndex(const FVector& ActorLocation) const;
 
-	/** Try to get the next Patrol Index and return if succeeded */
+	/** Try to get the next Patrol Index and return true if succeeded */
 	bool GetNextPatrolIndex(uint8& PatrolIndex, bool bReverse) const;
-
+	
 	// Components
 protected:
 	UPROPERTY(VisibleAnywhere, Category=Components)

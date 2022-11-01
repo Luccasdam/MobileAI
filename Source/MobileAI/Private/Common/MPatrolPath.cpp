@@ -3,10 +3,12 @@
 
 #include "Common/MPatrolPath.h"
 #include "Components/BillboardComponent.h"
+#include "MobileAI/MobileAI.h"
 
+DEFINE_LOG_CATEGORY(LogPatrol);
 
 AMPatrolPath::AMPatrolPath()
-	: bLoop(false)
+	: bLoop(true)
 	, PatrolToleranceDistance(100.f)
 {
 	BillboardComp = CreateDefaultSubobject<UBillboardComponent>("BillboardComp");
@@ -34,7 +36,7 @@ uint8 AMPatrolPath::GetClosestPatrolIndex(const FVector& ActorLocation) const
 		return BestIndex;
 	}
 
-	UE_LOG(LogTemp, Warning, TEXT("PatrolSystem: Trying to get ClosestPatrol but there should be at least 2 Locations"))
+	UE_LOG(LogPatrol, Warning, TEXT("PatrolSystem: Trying to get ClosestPatrol but there should be at least 2 Locations"))
 	return 0;
 }
 
@@ -54,4 +56,3 @@ bool AMPatrolPath::GetNextPatrolIndex(uint8& PatrolIndex, bool bReverse) const
 	PatrolIndex = bReverse ? PatrolIndex-1 : PatrolIndex+1;
 	return true;
 }
-

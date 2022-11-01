@@ -19,16 +19,10 @@ public:
 	UMPatrolPathFollowerComponent();
 
 	// Methods
+public:
 	static UMPatrolPathFollowerComponent* GetPatrolPathFollowerComp(const APawn* TargetPawn);
 	FVector GetPatrolLocation();
-
-	// Getters
-	bool HasPatrolPath() const	{ return PatrolPath != nullptr; }
-	AMPatrolPath* GetPatrolPath() const	{ return PatrolPath; }
-	uint8 GetPatrolIndex() const	{ return CurrentPatrolIndex; }
-	float GetPatrolToleranceDistance() const	{ return PatrolPath->GetPatrolToleranceDistance(); }
 	
-
 	// Data
 protected:
 	/** Patrol Path to Follow */
@@ -42,4 +36,11 @@ protected:
 private:
 	UPROPERTY()
 	uint8 CurrentPatrolIndex;
+
+	// Inline Getters
+public:
+	bool HasPatrolPath() const	{ return IsValid(PatrolPath); }
+	AMPatrolPath* GetPatrolPath() const	{ return PatrolPath; }
+	uint8 GetPatrolIndex() const	{ return CurrentPatrolIndex; }
+	float GetPatrolToleranceDistance() const	{ return PatrolPath->GetPatrolToleranceDistance(); }
 };

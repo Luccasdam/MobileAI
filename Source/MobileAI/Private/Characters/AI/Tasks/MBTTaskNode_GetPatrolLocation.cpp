@@ -17,14 +17,19 @@ UMBTTaskNode_GetPatrolLocation::UMBTTaskNode_GetPatrolLocation()
 
 EBTNodeResult::Type UMBTTaskNode_GetPatrolLocation::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
-	if (const APawn* MyPawn = OwnerComp.GetAIOwner()->GetPawn())
-	{
-		if (UMPatrolPathFollowerComponent* PatrolComp = UMPatrolPathFollowerComponent::GetPatrolPathFollowerComp(MyPawn))
-		{
-			OwnerComp.GetBlackboardComponent()->SetValueAsVector(BlackboardKey.SelectedKeyName, PatrolComp->GetPatrolLocation());
-			return EBTNodeResult::Succeeded;
-		}
-	}	
+	// Conditions check
+	const APawn* MyPawn = OwnerComp.GetAIOwner()->GetPawn();
+	if (MyPawn == nullptr)
+		return EBTNodeResult::Failed;
 
-	return EBTNodeResult::Failed;
+	UMPatrolPathFollowerComponent* PatrolComp = UMPatrolPathFollowerComponent::GetPatrolPathFollowerComp(MyPawn);
+	if (PatrolComp == nullptr)
+		return EBTNodeResult::Failed;
+
+	if (!PatrolComp->HasPatrolPath())
+		return EBTNodeResult::Failed;
+
+	
+	OwnerComp.GetBlackboardComponent()->SetValueAsVector(BlackboardKey.SelectedKeyName, PatrolComp->GetPatrolLocation());
+	return EBTNodeResult::Succeeded;
 }

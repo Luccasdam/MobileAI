@@ -13,11 +13,15 @@ UMBTDecorator_CanPatrol::UMBTDecorator_CanPatrol()
 
 bool UMBTDecorator_CanPatrol::CalculateRawConditionValue(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) const
 {
-	if (const APawn* MyPawn = OwnerComp.GetAIOwner()->GetPawn())
-	{
-		if (const UMPatrolPathFollowerComponent* PatrolComp = UMPatrolPathFollowerComponent::GetPatrolPathFollowerComp(MyPawn))
-			return PatrolComp->HasPatrolPath();
-	}	
+	// Conditions check
+	const APawn* MyPawn = OwnerComp.GetAIOwner()->GetPawn();
+	if (MyPawn == nullptr)
+		return false;
 
-	return false;
+	const UMPatrolPathFollowerComponent* PatrolComp = UMPatrolPathFollowerComponent::GetPatrolPathFollowerComp(MyPawn);
+	if (PatrolComp == nullptr)
+		return false;
+
+
+	return PatrolComp->HasPatrolPath();
 }
