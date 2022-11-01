@@ -19,6 +19,7 @@ enum class EAIState : uint8
 	Sleep,
 	Guard,
 	Suspicious,
+	Investigating,
 	Alert
 };
 

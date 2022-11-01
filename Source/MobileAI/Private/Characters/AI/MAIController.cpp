@@ -92,8 +92,12 @@ void AMAIController::OnCharacterStateChanged(const EAIState& NewState)
 		}
 	case EAIState::Suspicious:
 		{
-			// Probably make better hearing and vision
-			UE_LOG(LogAI, Warning, TEXT("Suspiocus State doesn't change state inside AI Controller"))
+			UE_LOG(LogAI, Warning, TEXT("Suspicious State doesn't change state inside AI Controller"))
+			break;
+		}
+	case EAIState::Investigating:
+		{
+			Blackboard->SetValueAsBool("bInvestigating", true);
 			break;
 		}
 	case EAIState::Alert:
@@ -125,6 +129,13 @@ void AMAIController::OnTargetPerceptionUpdated(AActor* Actor, FAIStimulus Stimul
 	if (Stimulus.Type.Name == STIMULI_TYPE_NAME_HEARING)
 	{
 		UE_LOG(LogAIPerception, Log, TEXT("AI Target Perception Updated: Hearing Sense"))
+
+		// Received a new suspicious info
+		Blackboard->SetValueAsBool("bSuspicious", true);
+		
+		// Stop investigation when received a new info
+		Blackboard->SetValueAsBool("bInvestigating", false);
+		
 		// TODO: Make a better way of getting the NoiseLocation
 		Blackboard->SetValueAsVector("NoiseLocation", Actor->GetActorLocation());
 	}
