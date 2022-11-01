@@ -10,6 +10,6 @@ public class MobileAI : ModuleRules
 
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "NavigationSystem", "AIModule" });
         
-        PublicDependencyModuleNames.AddRange(new string[] { "GameplayTasks" });
+        PublicDependencyModuleNames.AddRange(new string[] { "GameplayTasks", "UMG", "Slate" });
 	}
 }

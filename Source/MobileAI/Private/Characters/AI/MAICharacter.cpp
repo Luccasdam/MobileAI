@@ -31,6 +31,12 @@ AMAICharacter::AMAICharacter()
 	DisplaySleepStruct.DisplayTime = 0.f;
 	DisplaySleepStruct.bLoop = true;
 
+	// Suspicious Display Setup
+	DisplaySuspiciousStruct.DisplayText = "?";
+	DisplaySuspiciousStruct.PlayRate = 4.f;
+	DisplaySuspiciousStruct.DisplayTime = 1.f;
+	DisplaySuspiciousStruct.bLoop = false;
+
 	// Alert Display Setup
 	DisplayAlertStruct.DisplayText = "!";
 	DisplayAlertStruct.PlayRate = 4.f;
@@ -42,7 +48,7 @@ void AMAICharacter::SetAIState_Implementation(const EAIState NewState)
 {
 	AIState = NewState;
 	OnStateChanged.Execute(AIState);
-
+	
 	switch (AIState)
 	{
 	case EAIState::Idle: case EAIState::Guard: default:
@@ -53,6 +59,11 @@ void AMAICharacter::SetAIState_Implementation(const EAIState NewState)
 	case EAIState::Sleep:
 		{
 			DisplayState(DisplaySleepStruct);
+			break;
+		}
+	case EAIState::Suspicious:
+		{
+			DisplayState(DisplaySuspiciousStruct);
 			break;
 		}
 	case EAIState::Alert:

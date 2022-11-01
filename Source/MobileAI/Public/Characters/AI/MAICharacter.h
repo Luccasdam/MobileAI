@@ -18,6 +18,7 @@ enum class EAIState : uint8
 	Idle,
 	Sleep,
 	Guard,
+	Suspicious,
 	Alert
 };
 
@@ -88,6 +89,9 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category=AI)
 	FDisplayStateStruct DisplaySleepStruct;
+
+	UPROPERTY(BlueprintReadOnly, Category=AI)
+	FDisplayStateStruct DisplaySuspiciousStruct;
 
 	UPROPERTY(BlueprintReadOnly, Category=AI)
 	FDisplayStateStruct DisplayAlertStruct;

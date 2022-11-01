@@ -9,6 +9,7 @@
 #include "MAIController.generated.h"
 
 class UAISenseConfig_Sight;
+class UAISenseConfig_Hearing;
 
 
 /**
@@ -32,10 +33,11 @@ protected:
 	UFUNCTION()
 	void OnTargetPerceptionUpdated(AActor* Actor, FAIStimulus Stimulus);
 
+
 protected:
 	UPROPERTY(EditDefaultsOnly, Category=AI)
-	UBehaviorTree* BT;
+	UAISenseConfig_Sight* SightConfig;
 
 	UPROPERTY(EditDefaultsOnly, Category=AI)
-	UAISenseConfig_Sight* SightConfig;
+	UAISenseConfig_Hearing* HearingConfig;
 };

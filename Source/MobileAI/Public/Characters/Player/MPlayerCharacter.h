@@ -33,6 +33,7 @@ public:
 	void MoveForward(float Value);
 	void MoveRight(float Value);
 
+	UFUNCTION(BlueprintCallable)
 	void Punch();
 	void FireWeapon();
 	void CrouchFlipFlop();
@@ -50,9 +51,6 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Componets)
 	UAIPerceptionStimuliSourceComponent* AIStimuliComp;
 
-	// AI
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category=AI)
-	TSubclassOf<UAISense> AISenseClass;
 
 	// Movement
 protected:

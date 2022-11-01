@@ -22,6 +22,9 @@ class MOBILEAI_API AMGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 
+public:
+	virtual void StartPlay() override;
+
 	// Methods
 public:
 	// TODO: This should be made inside an AI Manager Class. Making here just for simplicity.
@@ -53,8 +56,12 @@ private:
 
 	// Temp
 protected:
+	uint8 GetCurrentLevelIndex();
 	uint8 GetNextLevelIndex();
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category=Temp)
 	TArray<FString> LevelNameList;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category=Temp)
+	TArray<TSubclassOf<UUserWidget>> WidgetClasses;
 };

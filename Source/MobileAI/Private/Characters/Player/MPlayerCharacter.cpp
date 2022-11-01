@@ -6,6 +6,8 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Perception/AIPerceptionStimuliSourceComponent.h"
+#include "Perception/AISense_Hearing.h"
+#include "Perception/AISense_Sight.h"
 
 
 AMPlayerCharacter::AMPlayerCharacter()
@@ -40,7 +42,9 @@ AMPlayerCharacter::AMPlayerCharacter()
 
 	// AI Perception Stimuli
 	AIStimuliComp = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>("AIStimuli");
-	AIStimuliComp->RegisterForSense(AISenseClass);
+	AIStimuliComp->RegisterForSense(TSubclassOf<UAISense_Sight>());
+	AIStimuliComp->RegisterForSense(TSubclassOf<UAISense_Hearing>());
+	AIStimuliComp->RegisterWithPerceptionSystem();
 }
 
 void AMPlayerCharacter::BeginPlay()
@@ -89,6 +93,8 @@ void AMPlayerCharacter::MoveRight(float Value)
 
 void AMPlayerCharacter::Punch()
 {
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Orange, TEXT("Punch!"));
+	MakeNoise(1, this, GetActorLocation());
 }
 
 void AMPlayerCharacter::FireWeapon()
